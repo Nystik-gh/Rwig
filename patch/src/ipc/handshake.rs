@@ -2,18 +2,17 @@ use std::sync::{Arc, Mutex};
 
 use crate::{
     audio::endpoint::create_endpoint,
-    com::com_initialized,
     common::{
         ipc::IpcMessage,
         utils::error::{PatchError, PatchError::HandshakeFailed},
     },
     utils::get_mix_format,
 };
-use ipc_channel::ipc::{self, IpcBytesSender, IpcReceiver, IpcSender};
+use ipc_channel::ipc::{self, IpcReceiver, IpcSender};
 
 use crate::{
     detours::init_detours,
-    ipc::{channels::initialize_channels, listener::start_listener},
+    ipc::{channels::initialize_message_channel, listener::start_listener},
 };
 
 dll_syringe::payload_procedure! {
@@ -33,7 +32,7 @@ dll_syringe::payload_procedure! {
         std::thread::spawn(move || {
           if let Ok(msg) = rx1.recv() && let IpcMessage::Sender(tx2) = msg {
             if let Ok(msg) = rx1.recv() && let IpcMessage::ByteSender(txb) = msg {
-              match initialize_channels(tx2.clone()) {
+              match initialize_message_channel(tx2.clone()) {
                 Ok(_) => {
                   start_listener(rx1);
                   tx2.send(IpcMessage::Success).ok();

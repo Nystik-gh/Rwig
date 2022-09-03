@@ -1,7 +1,6 @@
 use std::{env, path::Path};
 
 use crate::common::utils::{error::InjectionError, PointerWidth};
-use dll_syringe::error::InjectError;
 
 pub const PATCH_NAME_DEFAULT: &str = "patch";
 

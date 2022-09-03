@@ -1,4 +1,4 @@
-use std::{error::Error, mem::transmute};
+use std::mem::transmute;
 
 use detour::static_detour;
 use windows::{
@@ -9,7 +9,7 @@ use windows::{
     },
 };
 
-use crate::audio::endpoint::{get_endpoint, BUFFER_SIZE};
+use crate::audio::endpoint::get_endpoint;
 
 static_detour! {
   pub static GET_CURRENT_PADDING_DETOUR: extern "system" fn(IAudioClient, *mut u32) -> HRESULT;

@@ -6,7 +6,6 @@ pub const WAVE_FORMAT_IEEE_FLOAT: u16 = 0x0003;
 
 pub const WAVE_FORMAT_EXTENSIBLE: u16 = 0xfffe;
 
-// ext_format: MixFormatExt { format: MixFormat { format_tag: Other(65534), channels: 2, sample_rate: 44100, byte_transfer_rate: 352800, block_align: 8, bits_per_sample: 32 }, valid_bits_per_sample: 32, samples_per_block: 32, reserved: 32, channel_mask: 3, sub_format: 00000003-0000-0010-8000-00AA00389B71 } //subformat is floating point IEEE, first section of guid equals WAVE_FORMAT_IEEE_FLOAT
 #[derive(Serialize, Deserialize, Debug, Clone, Copy)]
 pub struct GUID {
     pub data1: u32,

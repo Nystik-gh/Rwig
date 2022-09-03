@@ -1,12 +1,9 @@
-use std::sync::{Arc, Mutex};
-
 use crate::common::{
     audio::MixFormat,
     ipc::IpcMessage,
-    utils::error::{InjectionError, IpcError, PatchError, RwigError},
+    utils::error::{IpcError, RwigError},
 };
-use dll_syringe::{error::InjectError, rpc::RemotePayloadProcedure};
-use ipc_channel::ipc::{self, IpcBytesReceiver, IpcOneShotServer, IpcReceiver, IpcSender};
+use ipc_channel::ipc::{IpcReceiver, IpcSender};
 
 use crate::{
     hook::Injector,
